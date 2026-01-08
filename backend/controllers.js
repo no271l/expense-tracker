@@ -94,3 +94,35 @@ exports.getSubcategories = async (req, res) => {
         res.json(rows);
     } catch (err) { res.status(500).json({ error: err.message }); }
 };
+
+// 5. Login: Έλεγχος χρήστη
+exports.login = async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        // ΔΙΟΡΘΩΣΗ ΕΔΩ: Χρήση 'user' (μικρά) αντί για 'Users'
+        const [rows] = await db.query(
+            'SELECT user_id, username, email FROM user WHERE username = ? AND password = ?', 
+            [username, password]
+        );
+
+        if (rows.length > 0) {
+            // Βρήκαμε τον χρήστη!
+            res.json({ success: true, user: rows[0] });
+        } else {
+            res.status(401).json({ success: false, message: 'Λάθος όνομα χρήστη ή κωδικός' });
+        }
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+// 6. Get All Users: Φέρε όλους τους χρήστες (ΝΕΟ)
+exports.getAllUsers = async (req, res) => {
+    try {
+        // Επιλέγουμε μόνο τα βασικά στοιχεία
+        const [rows] = await db.query('SELECT user_id, username, email FROM user');
+        res.json(rows);
+    } catch (err) { 
+        res.status(500).json({ error: err.message }); 
+    }
+};
