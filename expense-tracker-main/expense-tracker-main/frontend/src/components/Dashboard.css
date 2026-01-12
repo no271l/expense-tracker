@@ -1,0 +1,124 @@
+/* Dashboard.css - Clean & Modern Layout */
+
+/* Γενικό Container */
+.dashboard-container {
+    padding: 30px;
+    background-color: #f4f6f8; /* Απαλό γκρι φόντο */
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header (Λογότυπο & Logout) */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1a1c20;
+}
+
+.logout-btn {
+    padding: 8px 20px;
+    background-color: #ff5b5b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* GRID LAYOUT: Εδώ είναι το μυστικό για να μπουν δίπλα-δίπλα */
+.info-grid {
+    display: grid;
+    /* Δημιουργεί 3 ίσες στήλες. Αν δεν χωράνε (κινητό), τις πάει κάτω */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* Οι Κάρτες (Balance, Goal, Chart) */
+.info-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Ελαφριά σκιά */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Κεντράρισμα κάθετα */
+    min-height: 200px;       /* Ελάχιστο ύψος για να είναι ομοιόμορφα */
+}
+
+.info-card h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* Κείμενα μέσα στις κάρτες */
+.value-text {
+    font-size: 32px;
+    font-weight: 800;
+    color: #2d3436;
+}
+
+.sub-text {
+    font-size: 16px;
+    color: #636e72;
+    margin-top: 5px;
+}
+
+/* ΠΕΡΙΟΡΙΣΜΟΣ ΓΡΑΦΗΜΑΤΟΣ */
+.chart-wrapper {
+    position: relative;
+    height: 180px; /* Σταθερό ύψος για να μην ξεχειλώνει */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Πίνακας Εξόδων */
+.table-section {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.table-title {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #2d3436;
+    text-transform: capitalize;
+}
+
+.expense-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.expense-table th {
+    text-align: left;
+    padding: 15px;
+    color: #b2b2b2;
+    font-size: 12px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+}
+
+.expense-table td {
+    padding: 15px;
+    border-bottom: 1px solid #f9f9f9;
+    color: #2d3436;
+    font-size: 14px;
+}
+
+.expense-table tr:last-child td {
+    border-bottom: none;
+}
