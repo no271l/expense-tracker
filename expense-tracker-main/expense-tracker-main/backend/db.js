@@ -1,14 +1,14 @@
+require('dotenv').config();
 const mysql = require('mysql2');
 
-// --- ΣΗΜΑΝΤΙΚΟ: ΑΓΝΟΟΥΜΕ ΤΟ .ENV ΚΑΙ ΒΑΖΟΥΜΕ ΤΑ ΣΤΟΙΧΕΙΑ "ΚΑΡΦΩΤΑ" ---
-console.log("--> CONNECTING WITH HARDCODED CREDENTIALS <--");
+console.log("--> CONNECTING TO DB (using env vars / defaults) <--");
 
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'apo12apo',  // <--- Ο ΚΩΔΙΚΟΣ ΣΟΥ (Σιγουρέψου ότι είναι σωστός)
-    database: 'expensetrackerdb',
-    port: 3306,
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASS || 'apo12apo',
+    database: process.env.DB_NAME || 'expensetrackerdb',
+    port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 3306,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
