@@ -7,8 +7,6 @@ Full stack expense tracker with MySQL, Node.js and React.
 
 ### 1. Backend Setup
 
-Το backend είναι υπεύθυνο για την επικοινωνία με τη βάση δεδομένων.
-
 #### a. Database Setup
 **Προαπαιτούμενα:** Βεβαιωθείτε ότι έχετε εγκατεστημένο και σε λειτουργία έναν MySQL server.
 
@@ -19,74 +17,94 @@ Full stack expense tracker with MySQL, Node.js and React.
     ```
 2.  **Εισαγωγή του Σχήματος:**
     Εισάγετε τη δομή και τα αρχικά δεδομένα εκτελώντας το αρχείο `schema.sql` που βρίσκεται στον ριζικό φάκελο του project.
+
+    Το `schema.sql` είναι το dump αρχείου της βάσης δεδομένων που δημιουργήθηκε στο δεύτερο παραδοτέο.
+    Άνοιξε το MySQL Workbench και σύνδεσε στον τοπικό/απομακρυσμένο MySQL server (host, port 3306, user, password). Στη συνέχεια, μπορείς να εκτελέσεις το `schema.sql` με έναν από τους παρακάτω τρόπους:
+    CREATE DATABASE expense_tracker_db;
+    USE expense_tracker_db;
+    SOURCE schema.sql;  
+    Import του schema.sql μέσω Workbench:
+    Server → Data Import → Import from Self-Contained File → επίλεξε schema.sql → Start Import
+    έλεγξε ότι τα tables και τα αρχικά δεδομένα υπάρχουν στο schema μέσω του Schema Explorer στο Workbench
     
-    *   **Μέσω γραμμής εντοлών (από τον φάκελο `expense-tracker-main`):**
-        ```bash
-        mysql -u your_username -p expense_tracker_db < schema.sql
-        ```
-        (Αντικαταστήστε το `your_username` με το δικό σας και το `expense_tracker_db` με το όνομα της βάσης που δημιουργήσατε).
-    *   **Μέσω εργαλείου:** Χρησιμοποιήστε την επιλογή "Import" ή "Run SQL Script" του εργαλείου σας για να εκτελέσετε το περιεχόμενο του `schema.sql`.
+    *  
+     # expense-tracker
+     Full stack expense tracker with MySQL, Node.js and React.
 
-#### b. Application Setup
+     ## Οδηγίες Εκτέλεσης
 
-1.  **Μεταβείτε στον φάκελο `backend`:**
-    ```bash
-    cd expense-tracker-main/backend
-    ```
-2.  **Εγκαταστήστε τα dependencies:**
-    ```bash
-    npm install
-    ```
-3.  **Ρυθμίστε τις μεταβλητές περιβάλλοντος:**
-    *   Στον φάκελο `backend`, μετονομάστε το αρχείο `.env.example` (αν υπάρχει) σε `.env`.
-    *   Ανοίξτε το `.env` και συμπληρώρώστε τα στοιχεία `DB_HOST`, `DB_USER`, `DB_PASS`, και `DB_NAME` ώστε να ταιριάζουν με τη βάση δεδομένων που δημιουργήσατε στο προηγούμενο βήμα.
-4.  **Ξεκινήστε τον server:**
-    ```bash
-    npm start
-    ```
-    Ο server θα πρέπει να τρέχει στη διεύθυνση `http://localhost:3001`.
+     Για την εκτέλεση της εφαρμογής, βεβαιωθείτε ότι έχετε σε λειτουργία τόσο το backend (server) όσο και το frontend (interface).
 
-### 2. Frontend Setup (Περιβάλλον Διεπαφής)
+     ### 1. Backend Setup
 
-Το frontend είναι το οπτικό περιβάλλον της εφαρμογής με το οποίο αλληλεπιδρά ο χρήστης.
+     #### a. Database Setup
+     **Προαπαιτούμενα:** Ένας MySQL server (τοπικός ή απομακρυσμένος).
 
-1.  **Ανοίξτε ένα νέο τερματικό.**
-2.  **Μεταβείτε στον φάκελο `frontend`:**
-    ```bash
-    cd expense-tracker-main/frontend
-    ```
-3.  **Εγκαταστήστε τα dependencies:**
-    ```bash
-    npm install
-    ```
-4.  **Ξεκινήστε τον development server:**
-    ```bash
-    npm run dev
-    ```
-5.  **Ανοίξτε την εφαρμογή:**
-    *   Αφού ξεκινήσει ο server, ανοίξτε τον browser σας και πλοηγηθείτε στη διεύθυνση που υποδεικνύει το τερματικό (συνήθως `http://localhost:5173`).
+     1. **Δημιουργία βάσης (αν δεν υπάρχει):**
+     ```sql
+     CREATE DATABASE expensetrackerdb;
+     ```
 
----
+     2. **Import του schema (`schema.sql`) — MySQL Workbench:**
+     - Άνοιξε το MySQL Workbench και σύνδεσε στον server (host, port 3306, user, password).
+     - Επιλογή A — Self-contained import:
+       - `Server` → `Data Import` → `Import from Self-Contained File` → επίλεξε `schema.sql` → `Start Import`.
+     - Επιλογή B — Εκτέλεση script:
+       - `File` → `Open SQL Script` → επίλεξε `schema.sql` → πάτησε `Execute`.
+     - Εναλλακτικά, στο SQL Editor μπορείς να τρέξεις:
+     ```sql
+     USE expensetrackerdb;
+     SOURCE schema.sql;
+     ```
+     - Έλεγξε μέσω του Schema Explorer ότι τα tables και τα αρχικά δεδομένα υπάρχουν.
 
-## Βασικές Λειτουργίες
+     #### b. Application Setup
 
-Αυτή τη στιγμή, η εφαρμογή υποστηρίζει τις παρακάτω λειτουργίες:
+     1. **Μετάβαση στον φάκελο `backend`:**
+     ```bash
+     cd expense-tracker-main/backend
+     ```
+     2. **Εγκατάσταση dependencies:**
+     ```bash
+     npm install
+     ```
+     3. **dotenv & .env:**
+     - Έχω προσθέσει `backend/.env.example`. Αντέγραψε το σε `backend/.env` και γέμισε με τα πραγματικά credentials:
+     ```
+     DB_HOST=localhost
+     DB_PORT=3306
+     DB_USER=appuser
+     DB_PASS=strong_password
+     DB_NAME=expensetrackerdb
+     ```
+     - Μην ανεβάζεις το `backend/.env` στο repository.
+     4. **Εκκίνηση server:**
+     ```bash
+     npm start
+     ```
+     Ο server αναμένεται να τρέχει στο `http://localhost:3001`.
 
-### **Διαχείριση Χρηστών**
--   **Εγγραφή & Σύνδεση:** Πλήρες σύστημα αυθεντικοποίησης χρηστών. Η εγγραφή νέου χρήστη αποθηκεύει τον κωδικό του με ασφαλή τρόπο (hashing), ενώ η σύνδεση δημιουργεί μια ασφαλή συνεδρία (session) μέσω JWT tokens.
--   **Διατήρηση Σύνδεσης:** Ο χρήστης μπορεί να επιλέξει να παραμείνει συνδεδεμένος ακόμα και αν κλείσει τον browser.
--   **Αποσύνδεση:** Πλήρης λειτουργικότητα αποσύνδεσης που τερματίζει τη συνεδρία.
+     ### 2. Frontend Setup
 
-### **Dashboard (Γενική Επισκόπηση)**
--   **Τρέχον Υπόλοιπο:** Κεντρική κάρτα που εμφανίζει το συνολικό υπόλοιπο (τρέχοντα έσοδα μείον έξοδα).
--   **Οικονομικοί Στόχοι:** Εμφάνιση της συνολικής προόδου προς την επίτευξη όλων των οικονομικών στόχων.
--   **Κατανομή Εξόδων:** Διάγραμμα τύπου "Doughnut" που οπτικοποιεί το ποσοστό των εξόδων ανά κύρια κατηγορία.
--   **Πρόσφατες Κινήσεις:** Λίστα με τις πιο πρόσφατες συναλλαγές (έξοδα, έσοδα, δάνεια) για γρήγορη ενημέρωση.
+     1. Άνοιξε νέο τερματικό και πήγαινε στο `frontend`:
+     ```bash
+     cd expense-tracker-main/frontend
+     npm install
+     npm run dev
+     ```
+     2. Άνοιξε το URL που εμφανίζει το dev server (συνήθως `http://localhost:5173`).
 
-### **Διαχείριση Οικονομικών Κινήσεων**
--   **Καταχώρηση:** Ειδικές φόρμες για την προσθήκη νέων εξόδων, εσόδων και δανείων.
--   **Ιστορικό Κινήσεων:** Αναλυτική σελίδα που παρουσιάζει το πλήρες ιστορικό των εξόδων με λεπτομέρειες.
+     ---
 
-### **Διαχείριση Στόχων & Αποταμίευσης**
--   **Δημιουργία Στόχων:** Δυνατότητα προσθήκης νέων προσωπικών οικονομικών στόχων (π.χ. "Αγορά αυτοκινήτου") με συγκεκριμένο ποσό-στόχο.
--   **Προσθήκη Αποταμίευσης:** Δυνατότητα προσθήκης ποσών στο γενικό ταμείο αποταμίευσης.
+     ## Βασικές Λειτουργίες
+
+     Η εφαρμογή υποστηρίζει:
+
+     - Διαχείριση χρηστών (εγγραφή, σύνδεση, JWT sessions)
+     - Dashboard με υπόλοιπο, στόχους και κατανομή εξόδων
+     - Καταχώρηση και ιστορικό κινήσεων (έξοδα, έσοδα, δάνεια)
+     - Διαχείριση στόχων & αποταμίευσης
+
+     ---
+
+     Αν θέλεις, μπορώ να προσθέσω Windows PowerShell σημειώσεις ή screenshots για το Workbench.
